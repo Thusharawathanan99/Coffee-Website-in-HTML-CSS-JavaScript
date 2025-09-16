@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew Haven Coffee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4E342E;
+            --secondary: #795548;
+            --accent: #A1887F;
+            --light: #F5F5F5;
+            --dark: #3E2723;
+            --text: #212121;
+            --text-light: #757575;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 25%;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .menu-item p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-details p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-col p, .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 100px 0 50px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Shop Page */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .product p {
+            color: var(--text-light);
+            margin: 0.5rem 0;
+        }
+
+        .add-to-cart {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+        }
+
+        /* Blog Page */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-post h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .blog-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Cart Page */
+        .cart-container {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .cart-items {
+            flex: 2;
+        }
+
+        .cart-summary {
+            flex: 1;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            align-self: flex-start;
+        }
+
+        .cart-item {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .cart-item-content {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .remove-item {
+            color: #f44336;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content, .contact-container, .cart-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary);
+                transition: all 0.3s;
+                padding: 2rem;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cart-item {
+                flex-direction: column;
+            }
+
+            .cart-item img {
+                width: 100%;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-mug-hot"></i></div>
+                <div class="logo-text">Brew Haven</div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="menu">Menu</a></li>
+                    <li><a href="#" data-page="testimonials">Testimonials</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                    <li><a href="#" data-page="blog">Blog</a></li>
+                    <li><a href="#" data-page="shop">Shop</a></li>
+                    <li><a href="#" data-page="cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Experience the Perfect Cup of Coffee</h1>
+                <p>Discover the rich flavors and aromas of our carefully sourced beans, expertly roasted and brewed to perfection.</p>
+                <div class="hero-buttons">
+                    <a href="#" data-page="menu" class="btn">View Menu</a>
+                    <a href="#" data-page="contact" class="btn btn-outline">Visit Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Story</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Brewing Excellence Since 2010</h3>
+                        <p>Founded with a passion for exceptional coffee, Brew Haven has been serving the community for over a decade. Our journey began in a small garage with a single roaster and a dream to share the world's finest coffees.</p>
+                        <p>Today, we source our beans directly from sustainable farms around the world, roast them in-house to highlight their unique characteristics, and craft each cup with precision and care.</p>
+                        <p>We believe that coffee is more than just a beverage—it's a experience that brings people together, sparks creativity, and fuels passions.</p>
+                        <a href="#" data-page="about" class="btn">Learn More</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee brewing">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Menu</h2>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Espresso">
+                        <div class="menu-item-content">
+                            <h3>Espresso</h3>
+                            <p>Strong and bold, our signature espresso is crafted from carefully selected beans.</p>
+                            <div class="price">$3.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cappuccino">
+                        <div class="menu-item-content">
+                            <h3>Cappuccino</h3>
+                            <p>Perfect balance of espresso, steamed milk, and velvety foam.</p>
+                            <div class="price">$4.25</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Latte">
+                        <div class="menu-item-content">
+                            <h3>Latte</h3>
+                            <p>Smooth espresso combined with steamed milk and a light layer of foam.</p>
+                            <div class="price">$4.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1595867818082-083862f3aaf4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Mocha">
+                        <div class="menu-item-content">
+                            <h3>Mocha</h3>
+                            <p>Espresso with steamed milk and chocolate, topped with whipped cream.</p>
+                            <div class="price">$5.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cold Brew">
+                        <div class="menu-item-content">
+                            <h3>Cold Brew</h3>
+                            <p>Slow-steeped for 24 hours for a smooth, rich flavor.</p>
+                            <div class="price">$4.75</div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Iced Coffee">
+                        <div class="menu-item-content">
+                            <h3>Iced Coffee</h3>
+                            <p>Chilled coffee served with ice and your choice of milk.</p>
+                            <div class="price">$4.25</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What Our Customers Say</h2>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            <p>"The best coffee I've ever had! The atmosphere is perfect for getting work done or catching up with friends."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p>- Sarah J.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            <p>"I'm a coffee connoisseur, and Brew Haven never disappoints. Their beans are always fresh and expertly roasted."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p>- Michael T.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            <p>"The baristas are true artists. Every cup is crafted with care and precision. My daily stop for the perfect latte."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <p>- Emily R.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Visit Us</h2>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Lane, Brew City, BC 12345</p>
+                            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                            <p><i class="fas fa-envelope"></i> info@brewhaven.com</p>
+                            <p><i class="fas fa-clock"></i> Mon-Fri: 6:00 AM - 9:00 PM</p>
+                            <p><i class="fas fa-clock"></i> Sat-Sun: 7:00 AM - 10:00 PM</p>
+                        </div>
+                        <div class="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.621465758658!2d-74.0059493487117!3d40.72551664252175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259eb7c2b2483%3A0x77c75c5a05f55122!2sSoHo%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1678889833574!5m2!1sen!2s" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Brew Haven</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Journey</h3>
+                    <p>Brew Haven began in 2010 with a simple mission: to serve exceptional coffee in a warm, welcoming environment. What started as a small neighborhood café has grown into a beloved community gathering place, but our commitment to quality has never wavered.</p>
+                    <p>We directly source our beans from sustainable farms around the world, building relationships with growers who share our values of environmental stewardship and fair labor practices. Our master roaster carefully crafts each batch to highlight the unique characteristics of the beans.</p>
+                    <h3>Our Values</h3>
+                    <p>At Brew Haven, we believe in:</p>
+                    <ul>
+                        <li>Sustainability and ethical sourcing</li>
+                        <li>Community building and support</li>
+                        <li>Continuous learning and innovation</li>
+                        <li>Creating memorable experiences</li>
+                    </ul>
+                    <p>We're more than just a coffee shop – we're a place where connections are made, ideas are born, and everyone feels at home.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee shop interior">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Page -->
+    <div id="menu" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Complete Menu</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Espresso">
+                    <div class="menu-item-content">
+                        <h3>Espresso</h3>
+                        <p>Strong and bold, our signature espresso is crafted from carefully selected beans.</p>
+                        <div class="price">$3.50</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cappuccino">
+                    <div class="menu-item-content">
+                        <h3>Cappuccino</h3>
+                        <p>Perfect balance of espresso, steamed milk, and velvety foam.</p>
+                        <div class="price">$4.25</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Latte">
+                    <div class="menu-item-content">
+                        <h3>Latte</h3>
+                        <p>Smooth espresso combined with steamed milk and a light layer of foam.</p>
+                        <div class="price">$4.50</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1595867818082-083862f3aaf4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Mocha">
+                    <div class="menu-item-content">
+                        <h3>Mocha</h3>
+                        <p>Espresso with steamed milk and chocolate, topped with whipped cream.</p>
+                        <div class="price">$5.00</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cold Brew">
+                    <div class="menu-item-content">
+                        <h3>Cold Brew</h3>
+                        <p>Slow-steeped for 24 hours for a smooth, rich flavor.</p>
+                        <div class="price">$4.75</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Iced Coffee">
+                    <div class="menu-item-content">
+                        <h3>Iced Coffee</h3>
+                        <p>Chilled coffee served with ice and your choice of milk.</p>
+                        <div class="price">$4.25</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Americano">
+                    <div class="menu-item-content">
+                        <h3>Americano</h3>
+                        <p>Espresso shots topped with hot water for a rich, flavorful cup.</p>
+                        <div class="price">$4.00</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Macchiato">
+                    <div class="menu-item-content">
+                        <h3>Macchiato</h3>
+                        <p>Espresso with a dollop of frothy milk for a bold yet balanced flavor.</p>
+                        <div class="price">$4.50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Page -->
+    <div id="testimonials" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Testimonials</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"The best coffee I've ever had! The atmosphere is perfect for getting work done or catching up with friends."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- Sarah J.</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"I'm a coffee connoisseur, and Brew Haven never disappoints. Their beans are always fresh and expertly roasted."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- Michael T.</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"The baristas are true artists. Every cup is crafted with care and precision. My daily stop for the perfect latte."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- Emily R.</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"I love the cozy atmosphere at Brew Haven. It's my go-to spot for meetings and quiet work sessions."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- David K.</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"The pastries are as exceptional as the coffee. The perfect pairing for my morning espresso."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- Jessica L.</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        <p>"Brew Haven's cold brew got me through college. Now it gets me through work. The best in town!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <p>- Alex M.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i>Monaragala</p>
+                        <p><i class="fas fa-phone"></i>+9478482858</p>
+                        <p><i class="fas fa-envelope"></i>thushan88@gmail.com</p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 6:00 AM - 9:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Sat-Sun: 7:00 AM - 10:00 PM</p>
+                    </div>
+                    <div class="map">
+                        <iframe src="" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactFormPage">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Page -->
+    <div id="blog" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Brew Haven Blog</h2>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee brewing methods">
+                    <div class="blog-content">
+                        <h3>5 Brewing Methods Every Coffee Lover Should Try</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> June 15, 2023</span>
+                            <span><i class="far fa-user"></i> By John Doe</span>
+                        </div>
+                        <p>Explore different brewing techniques that can transform your coffee experience at home, from French Press to Pour Over and more.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee beans">
+                    <div class="blog-content">
+                        <h3>The Journey of a Coffee Bean: From Farm to Cup</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> May 28, 2023</span>
+                            <span><i class="far fa-user"></i> By Jane Smith</span>
+                        </div>
+                        <p>Follow the fascinating journey of coffee beans from sustainable farms to your morning cup, and learn what makes specialty coffee special.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Latte art">
+                    <div class="blog-content">
+                        <h3>The Art of Latte: How Baristas Create Beautiful Designs</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> April 12, 2023</span>
+                            <span><i class="far fa-user"></i> By Mike Johnson</span>
+                        </div>
+                        <p>Discover the techniques behind beautiful latte art and how our baristas train for months to perfect their pouring skills.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cold brew coffee">
+                    <div class="blog-content">
+                        <h3>Cold Brew vs. Iced Coffee: What's the Difference?</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> March 30, 2023</span>
+                            <span><i class="far fa-user"></i> By Sarah Williams</span>
+                        </div>
+                        <p>Learn the key differences between cold brew and iced coffee, and which one might be better for your taste preferences.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee tasting">
+                    <div class="blog-content">
+                        <h3>How to Host a Coffee Tasting Party at Home</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> February 18, 2023</span>
+                            <span><i class="far fa-user"></i> By Emily Chen</span>
+                        </div>
+                        <p>Throw the perfect coffee tasting gathering with our step-by-step guide to comparing flavors, aromas, and brewing methods.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coffee shop">
+                    <div class="blog-content">
+                        <h3>Why Community Matters: The Role of Local Coffee Shops</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> January 5, 2023</span>
+                            <span><i class="far fa-user"></i> By David Brown</span>
+                        </div>
+                        <p>Explore how local coffee shops serve as community hubs and why supporting them benefits neighborhoods and local economies.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Page -->
+    <div id="shop" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Products</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Ethiopian Yirgacheffe">
+                    <div class="product-content">
+                        <h3>Ethiopian Yirgacheffe</h3>
+                        <p>Bright and floral with notes of citrus and bergamot.</p>
+                        <div class="price">$14.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Colombian Supremo">
+                    <div class="product-content">
+                        <h3>Colombian Supremo</h3>
+                        <p>Well-balanced with caramel sweetness and nutty notes.</p>
+                        <div class="price">$12.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Guatemalan Antigua">
+                    <div class="product-content">
+                        <h3>Guatemalan Antigua</h3>
+                        <p>Rich and chocolatey with hints of spice and citrus.</p>
+                        <div class="price">$13.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Sumatra Mandheling">
+                    <div class="product-content">
+                        <h3>Sumatra Mandheling</h3>
+                        <p>Full-bodied with earthy notes and low acidity.</p>
+                        <div class="price">$15.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Espresso Blend">
+                    <div class="product-content">
+                        <h3>Espresso Blend</h3>
+                        <p>Our signature blend with notes of chocolate, caramel, and nuts.</p>
+                        <div class="price">$16.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Decaf House Blend">
+                    <div class="product-content">
+                        <h3>Decaf House Blend</h3>
+                        <p>All the flavor without the caffeine. Smooth and balanced.</p>
+                        <div class="price">$13.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="French Press">
+                    <div class="product-content">
+                        <h3>French Press</h3>
+                        <p>8-cup capacity, stainless steel with double filter.</p>
+                        <div class="price">$29.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Pour Over Set">
+                    <div class="product-content">
+                        <h3>Pour Over Set</h3>
+                        <p>Ceramic dripper with glass carafe and natural filters.</p>
+                        <div class="price">$34.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="cart" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Your Cart</h2>
+            </div>
+            <div class="cart-container">
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Ethiopian Yirgacheffe">
+                        <div class="cart-item-content">
+                            <div class="cart-item-details">
+                                <h3>Ethiopian Yirgacheffe</h3>
+                                <div class="cart-item-price">$14.99</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn">-</button>
+                                <span>1</span>
+                                <button class="quantity-btn">+</button>
+                                <button class="remove-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="French Press">
+                        <div class="cart-item-content">
+                            <div class="cart-item-details">
+                                <h3>French Press</h3>
+                                <div class="cart-item-price">$29.99</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn">-</button>
+                                <span>1</span>
+                                <button class="quantity-btn">+</button>
+                                <button class="remove-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Subtotal</span>
+                            <span>$44.98</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Shipping</span>
+                            <span>$4.99</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Tax</span>
+                            <span>$3.60</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Total</span>
+                            <span>$53.57</span>
+                        </div>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-top: 1.5rem;">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Brew Haven</h3>
+                    <p>Specialty coffee roaster and café dedicated to serving the finest coffee experiences since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="about">About Us</a></li>
+                        <li><a href="#" data-page="menu">Menu</a></li>
+                        <li><a href="#" data-page="shop">Shop</a></li>
+                        <li><a href="#" data-page="blog">Blog</a></li>
+                        <li><a href="#" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Store Hours</h3>
+                    <p>Monday - Friday: 6:00 AM - 9:00 PM</p>
+                    <p>Saturday - Sunday: 7:00 AM - 10:00 PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Lane, Brew City, BC 12345</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates and special offers.</p>
+                    <form id="newsletterForm">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Brew Haven Coffee. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Page Navigation
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('nav a, .hero-buttons a, .footer-col a');
+        
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const contactFormPage = document.getElementById('contactFormPage');
+        const newsletterForm = document.getElementById('newsletterForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+        
+        if (contactFormPage) {
+            contactFormPage.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for subscribing to our newsletter!');
+                this.reset();
+            });
+        }
+        
+        // Cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const quantityButtons = document.querySelectorAll('.quantity-btn');
+        const removeButtons = document.querySelectorAll('.remove-item');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
+        });
+        
+        quantityButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // This would update quantity in a real implementation
+                alert('Quantity updated!');
+            });
+        });
+        
+        removeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // This would remove item in a real implementation
+                alert('Item removed from cart!');
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.menu-item, .testimonial, .about-content, .product, .blog-post');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.menu-item, .testimonial, .about-content, .product, .blog-post').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
